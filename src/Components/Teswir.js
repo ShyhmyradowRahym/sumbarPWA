@@ -59,8 +59,8 @@ const Teswir = () => {
                     {dataRev && dataRev[0].map((e, o) => (
                         <div key={o}>
                             <div className='mt-2 flex pl-3 items-center'>
-                                {_.times(e.stars, () => (
-                                    <AiFillStar className='text-yellow-500' />
+                                {_.times(e.stars, (k) => (
+                                    <AiFillStar key={k} className='text-yellow-500' />
                                 ))}
                                 <p className='text-sm ml-2'>{e.status}</p>
                             </div>

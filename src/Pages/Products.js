@@ -10,10 +10,9 @@ import { addCart } from '../Features/cartSlice'
 import { Link } from 'react-router-dom'
 import { addEqual, delItemToEqual } from '../Features/equalSlice'
 import { LightgalleryProvider, LightgalleryItem, useLightgallery } from "react-lightgallery";
-import Login from '../Components/Login/Login'
 import service from '../Components/Interceptors/axios';
-function Products({ e , setHasabymModal}) {
-    const [show, setShow] = useState(true)
+function Products({ e, setHasabymModal }) {
+    const profileShow = useSelector(state => state.profileShow.profileShow)
     useEffect(() => {
         AOS.init({
             duration: 500,
@@ -23,9 +22,6 @@ function Products({ e , setHasabymModal}) {
     const cartProducts = useSelector(state => state.cart.cartProducts)
     const dispatch = useDispatch()
     const addCartOne = (product) => {
-        setTimeout(() => {
-            setShow(false)
-        }, 1500)
         const existItem = cartProducts.find(x => x.product.id === product.id)
         if (existItem) {
             dispatch(addCart({ quantity: existItem.quantity, product }))
@@ -33,13 +29,13 @@ function Products({ e , setHasabymModal}) {
             dispatch(addCart({ quantity: 1, product }))
         }
     }
-    const [favProducts, setFavProducts] = useState()
+    const [favProducts, setFavProducts] = useState(null)
     const [check, setCheck] = useState(false)
     const [like, setLike] = useState(false)
     useEffect(() => {
         async function getData() {
             try {
-                const response = await service.get('/users/favorites')
+                const response = profileShow && await service.get('/users/favorites')
                 setFavProducts(response.data)
             } catch (error) {
                 console.error(error);
@@ -54,7 +50,7 @@ function Products({ e , setHasabymModal}) {
     }, [favProducts])
     const handleHeart = () => {
         setHasabymModal(true)
-        if (!check) {
+        if (!check && profileShow) {
             service.post(`/product/like/${e.id}`, {})
                 .then(res => {
                     console.log(res.data);
@@ -64,7 +60,7 @@ function Products({ e , setHasabymModal}) {
                 }
                 )
         } else {
-            service.delete(`/product/like/${e.id}`)
+            profileShow && service.delete(`/product/like/${e.id}`)
                 .then(res => {
                     console.log(res.data);
                     setLike(!like)
@@ -118,7 +114,7 @@ function Products({ e , setHasabymModal}) {
         <div data-aos='fade' className='m-0 border-2 p-1'>
             <div className='flex items-center justify-end'>
                 <div className='flex items-center md:border-2 rounded-md px-1 cursor-pointer'>
-                    <input className='md:mr-1 cursor-pointer' id={e.title} name={e.title} onChange={() => handleEqual()} checked={equal} type={'checkbox'} />
+                    <input className='md:mr-1 cursor-pointer' value='' id={e.title} name={e.title} onChange={() => handleEqual()} checked={equal} type={'checkbox'} />
                     <label htmlFor={e.title} className='md:block hidden cursor-pointer'>Denesdirmek</label>
                 </div>
                 <LightgalleryProvider>

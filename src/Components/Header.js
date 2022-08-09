@@ -13,7 +13,6 @@ import { useSelector, useDispatch } from 'react-redux';
 import { TiTimes } from "react-icons/ti";
 import { BiSearch } from 'react-icons/bi'
 import Equal from './Equal';
-import { data } from './allData.js'
 import _ from "lodash";
 import AOS from 'aos';
 import "aos/dist/aos.css";
@@ -59,7 +58,7 @@ function Header() {
     useEffect(() => {
         async function getData() {
             try {
-                const response = await axios.get(`/product/search?word=${search}`);
+                const response = search && await axios.get(`/product/search?word=${search}`);
                 setDataSearch(response.data)
             } catch (error) {
                 console.error(error);

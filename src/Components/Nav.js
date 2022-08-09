@@ -1,41 +1,49 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useReducer } from 'react'
 import { BsFilterLeft } from "react-icons/bs";
 import { RiArrowDropRightFill } from 'react-icons/ri'
-import { Link, useLocation } from 'react-router-dom';
-import { TiArrowDown } from 'react-icons/ti'
-import Accordion from '../Components/Accordion'
-import { category1 } from '../Components/category1'
-import { BsEraserFill } from 'react-icons/bs'
+import { Link } from 'react-router-dom';
 import axios from 'axios'
 import _ from "lodash";
 import Loading from './Loading/Loading';
 import Teswir from './Teswir';
-import Login from './Login/Login';
-function Nav() {
-  // let title = useLocation()
-  // const [showCat, setShowCat] = useState(true)
-  // const [nav, setNav] = useState(false)
-  // const [ratings, setRatings] = useState(false)
-  // useEffect(() => {
-  //   title.pathname.includes('category') ? setNav(true) : setNav(false)
-  //   title.pathname.includes('ratings') ? setRatings(true) : setRatings(false)
-  // }, [title.pathname])
 
-  const [data, setData] = useState(null)
-  const [loading, setLoading] = useState(true)
+const initialValue = {
+  loading: false,
+  data: null
+}
+const reducer = (state, action) => {
+  switch (action.type) {
+    case "SET_LOADING":
+      return {
+        ...state,
+        loading: action.payload
+      }
+    case "GET_DATA":
+      return {
+        ...state,
+        data: action.payload
+      }
+    default:
+      return state;
+  }
+}
+function Nav() {
+
+  const [state, dispatch] = useReducer(reducer, initialValue);
   useEffect(() => {
     async function getData() {
       try {
-        const response = await axios.get(`/menu`);
-        setData(response.data)
-        setLoading(false)
+        const res = await axios.get(`/menu`);
+        if (res.data) { dispatch({ type: 'GET_DATA', payload: res.data }) }
+        dispatch({ type: 'SET_LOADING', payload: false })
       } catch (error) {
         console.error(error);
       }
     }
     getData()
-    setLoading(true)
+    dispatch({ type: 'SET_LOADING', payload: true })
   }, [])
+  console.log(state.category, ' ', state.loading);
   return (
     <div className='md:w-2/5 lg:w-1/4 w-full'>
       <div
@@ -45,14 +53,14 @@ function Nav() {
             <BsFilterLeft className='lg:ml-5 ml-1 text-2xl' /> <p className='ml-1 text-sm'>AHLI HARYTLAR</p>
           </Link>
           {
-            loading && <Loading loading={loading} />
+            state.loading && <Loading loading={state.loading} />
           }
           {/* {nav && <div onClick={() => setShowCat(!showCat)} className='cursor-pointer mt-2 md:flex hidden items-center px-2 py-2 bg-gray-700 w-full text-white font-bold'>
             <TiArrowDown className='lg:ml-5 ml-1 text-2xl' />
             <p className='text-sm'>KATEGORIYALAR</p>
           </div>} */}
-          {data &&
-            data.map((e, k) => (
+          {state.data &&
+            state.data.map((e, k) => (
               <div key={k} className="relative cursor-pointer md:p-0 bg-white">
                 <div className='peer border h-12 border p-2 w-full flex items-center justify-between'>
                   {e.subCategory.length > 0 ? <div className='flex items-center'>

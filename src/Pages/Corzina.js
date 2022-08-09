@@ -74,7 +74,7 @@ function Corzina() {
             </div>}
             {
                 cartProducts.map(e => (
-                    <div className='flex items-center w-full h-20 border-2 md:border-t-0 bg-white'>
+                    <div key={e.id} className='flex items-center w-full h-20 border-2 md:border-t-0 bg-white'>
                         <div className='w-3/4 flex items-center'>
                             <img src={e.product.imageUrl[0]} className='h-16 w-20 md:mx-4 mx-1' />
                             <p className='md:text-md text-sm'>{e.product.title}</p>
@@ -94,44 +94,44 @@ function Corzina() {
             <div className='md:mx-0 px-3 w-full md:w-1/2 float-right mt-8'>
                 <form>
                     <div className='mb-2'>
-                        <label for="countries" className="block mb-2 text-md font-medium text-gray-900">Eltip bermek üçin şäheriňiz <span className='text-red-500'>*</span></label>
+                        <label htmlFor="countries" className="block mb-2 text-md font-medium text-gray-900">Eltip bermek üçin şäheriňiz <span className='text-red-500'>*</span></label>
                         <select onChange={(e) => setData(e.target.value)} id="countries" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm focus:ring-red-500 focus:border-red-500 block w-full p-2">
                             {welayatlar.map((e, k) => (
-                                <option value={k}>{e.title}</option>
+                                <option key={k} value={k}>{e.title}</option>
                             ))}
                         </select>
                         {welayatlar[data].data.length > 0 && <select onChange={(e) => setCheck(e.target.value)} className="mt-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm focus:ring-red-500 focus:border-red-500 block w-full p-2">
                             {welayatlar[data].data.map((e, k) => (
-                                <option value={k}>{e}</option>
+                                <option key={k} value={k}>{e}</option>
                             ))}
                         </select>}
                     </div>
-                    <div class="relative overflow-x-auto shadow-md mb-4">
-                        <table class="w-full text-sm text-left text-gray-500">
-                            <thead class="text-xs text-gray-700 uppercase bg-gray-200">
+                    <div className="relative overflow-x-auto shadow-md mb-4">
+                        <table className="w-full text-sm text-left text-gray-500">
+                            <thead className="text-xs text-gray-700 uppercase bg-gray-200">
                                 <tr>
-                                    <th scope="col" class="px-6 py-4">
+                                    <th scope="col" className="px-6 py-4">
                                         Harytlar
                                     </th>
-                                    <th scope="col" class="px-6 py-4">
+                                    <th scope="col" className="px-6 py-4">
                                         {t} TMT
                                     </th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr class="border-b odd:bg-white even:bg-gray-200">
-                                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
+                                <tr className="border-b odd:bg-white even:bg-gray-200">
+                                    <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
                                         Eltip bermek
                                     </th>
-                                    <td class="px-6 py-4">
+                                    <td className="px-6 py-4">
                                         0 TMT
                                     </td>
                                 </tr>
-                                <tr class="border-b odd:bg-white even:bg-gray-200">
-                                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
+                                <tr className="border-b odd:bg-white even:bg-gray-200">
+                                    <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
                                         Jemi
                                     </th>
-                                    <td class="px-6 py-4 text-red-500">
+                                    <td className="px-6 py-4 text-red-500">
                                         {t} TMT
                                     </td>
                                 </tr>
@@ -144,7 +144,7 @@ function Corzina() {
                     </Link>
                 </form>
             </div >
-        </div >
+        </div>
     )
 }
 

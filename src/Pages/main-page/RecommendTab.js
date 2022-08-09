@@ -26,26 +26,30 @@ const RecommendTab = () => {
     const [hasabymModal, setHasabymModal] = useState(false)
     return (
         <div className='w-full'>
-            {
-                !profileShow && hasabymModal && <div>
-                    <Login setHasabymModal={setHasabymModal} />
-                </div>
-            }
+            <div>
+                {
+                    !profileShow && hasabymModal && <div>
+                        <Login setHasabymModal={setHasabymModal} />
+                    </div>
+                }
+            </div>
             <div className='w-full flex justify-end items-center my-2'>
                 <Link to='/recommend' className='flex items-center hover:text-red-600'>
                     <RiArrowDropRightFill className='text-3xl' />
                     <h1 className='md:text-md md:font-bold pr-1'>Hemmesi</h1>
                 </Link>
             </div>
-            {
-                loading ? <Loading loading={loading} /> :
-                    <div className='w-full grid grid-cols-2 grid-gap-2 sm:grid-cols-3 sm:grid-gap-3 md:grid-cols-2 md:grid-gap-2 lg:grid-cols-3 lg:grid-gap-3 xl:grid-cols-4 xl:grid-gap-4'>
-                        {data && data.map((e,k) => (
-                            <Products e={e} key={k} setHasabymModal={setHasabymModal}/>
-                        ))
-                        }
-                    </div>
-            }
+            <div>
+                {
+                    loading ? <Loading loading={loading} /> :
+                        <div className='w-full grid grid-cols-2 grid-gap-2 sm:grid-cols-3 sm:grid-gap-3 md:grid-cols-2 md:grid-gap-2 lg:grid-cols-3 lg:grid-gap-3 xl:grid-cols-4 xl:grid-gap-4'>
+                            {data && data.map((e, k) => (
+                                <Products e={e} key={k} setHasabymModal={setHasabymModal} />
+                            ))
+                            }
+                        </div>
+                }
+            </div>
         </div>
     )
 }

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import { FaAngleDown } from 'react-icons/fa'
 import { TiTick } from 'react-icons/ti'
 import AOS from 'aos';
@@ -17,12 +17,12 @@ function All() {
 
     const [showPag, setShowPag] = useState(false)
     const [pag, setPag] = useState(40)
-    const showFilter = () => {
+    const showFilter = useCallback(() => {
         setShow(!show)
-    }
-    const handleShowPag = () => {
+    },[show])
+    const handleShowPag = useCallback(() => {
         setShowPag(!showPag)
-    }
+    },[showPag])
     useEffect(() => {
         AOS.init({
             duration: 1000
@@ -67,8 +67,8 @@ function All() {
                             <FaAngleDown />
                         </div>
                         {show &&
-                            <div className="absolute z-10 w-36 right-0 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600">
-                                <ul className="text-xs text-gray-700 dark:text-gray-400" aria-labelledby="dropdownLargeButton">
+                            <div className="absolute z-10 w-36 right-0 bg-white rounded divide-y divide-gray-100 shadow">
+                                <ul className="text-xs text-gray-700 dark:text-gray-400">
                                     <li onClick={() => {setQuery(''); setFilter('Elipbiy boyunca'); showFilter(false) }} className='cursor-pointer flex items-center hover:bg-gray-100'>
                                         <p className={filter == 'Elipbiy boyunca' ? "text-red-500 block py-1 pl-4 text-md" : "text-md block py-1 pl-4"}>Elipbiy boyunca</p>
                                         {filter == 'Elipbiy boyunca' && <TiTick className='text-red-500' />}
@@ -136,8 +136,8 @@ function All() {
                             <FaAngleDown />
                         </div>
                         {showPag &&
-                            <div className="absolute z-10 w-16 right-0 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600">
-                                <ul className="text-xs text-gray-700 dark:text-gray-400" aria-labelledby="dropdownLargeButton">
+                            <div className="absolute z-10 w-16 right-0 bg-white rounded divide-y divide-gray-100 shadow">
+                                <ul className="text-xs text-gray-700">
                                     <li onClick={() => { setPag(40); handleShowPag(false) }} className='cursor-pointer flex w-full items-center hover:bg-gray-100'>
                                         <p className={pag === 40 ? "text-red-500 block py-1 pl-4 text-md" : "text-md block py-1 pl-4"}>40</p>
                                         {pag === 40 && <TiTick className='ml-1 text-red-500' />}

@@ -1,11 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import { FaAngleDown } from 'react-icons/fa'
 import { TiTick } from 'react-icons/ti'
-import { data } from '../../Components/allData'
 import AOS from 'aos';
 import "aos/dist/aos.css";
 import Products from '../Products'
-import axios from 'axios'
 import { BsSearch } from 'react-icons/bs'
 import service from '../../Components/Interceptors/axios';
 import { useSelector } from 'react-redux';

@@ -95,8 +95,8 @@ function Teswirler() {
         <div className=''>
           {loading && <Loading loading={loading} />}
           {
-            data && data[0].map(e => (
-              <div>
+            data && data[0].map((e,k) => (
+              <div key={k}>
                 <div className='w-11/12 mx-auto bg-gray-300' style={{ height: '1px' }}></div>
                 <div className='w-11/12 mx-auto mt-2 flex justify-between items-center'>
                   <div className='flex items-center'>

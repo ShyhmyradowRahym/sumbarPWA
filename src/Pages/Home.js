@@ -1,16 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import SliderMain from '../Components/SliderMain'
 import SliderMain1 from '../Components/SliderMain1'
-import { RiArrowDropRightFill } from 'react-icons/ri'
-import { AiFillStar } from 'react-icons/ai'
-import { IoPersonCircleSharp } from "react-icons/io5";
-import { data } from '../Components/data'
 import AOS from 'aos';
 import "aos/dist/aos.css";
-import Monitor from '../Components/Monitor'
-import Notebooks from '../Components/Notebooks'
-import Products from './Products'
-import { Link } from 'react-router-dom'
 import RecommendTab from './main-page/RecommendTab'
 import NewTab from './main-page/NewTab'
 import PopularTab from './main-page/PopularTab'
@@ -20,7 +12,6 @@ import WideoKarta from './Main-Category/WideoKarta'
 import MobilPeriferiya from './Main-Category/MobilPeriferiya'
 import Gulaklyklar from './Main-Category/Gulaklyklar'
 import Kalonkalar from './Main-Category/Kalonka'
-import axios from 'axios'
 import Teswir from '../Components/Teswir'
 function Home() {
     const [menu, setMenu] = useState(0)

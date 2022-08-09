@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { FaAngleDown } from 'react-icons/fa'
 import { TiTick } from 'react-icons/ti'
-import { data } from '../Components/allData'
 import AOS from 'aos';
 import "aos/dist/aos.css";
 import Products from './Products'
@@ -86,10 +85,10 @@ function Search() {
                 </div>
             </div>
             <div className='w-full grid grid-cols-2 grid-gap-2 sm:grid-cols-3 sm:grid-gap-3 md:grid-cols-2 md:grid-gap-2 lg:grid-cols-3 lg:grid-gap-3 xl:grid-cols-4 xl:grid-gap-4'>
-                {data && data.map(e => (
+                {/* {data && data.map(e => (
                     <Products e={e} />
                 ))
-                }
+                } */}
             </div>
         </div >
     )
